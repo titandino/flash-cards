@@ -1,5 +1,5 @@
 var inputHandler = {
-  keysDown = [],
+  keysDown: [],
   mousePos: {x: 0, y: 0},
 
   getMousePos: function(canvas, e) {
@@ -13,9 +13,9 @@ var inputHandler = {
 
 var kinderKards = {
   canvas: document.getElementById('card-canvas'),
-  ctx: canvas.getContext('2d');
+  ctx: document.getElementById('card-canvas').getContext('2d'),
 
-  currentCard: new BasicCard('What is love?', 'baby don\'t hurt me');
+  currentCard: new BasicCard('What is love?', 'baby don\'t hurt me'),
 
   drawText: function(text, x, y, color, size, font, align) {
     this.ctx.fillStyle = color;
@@ -30,12 +30,12 @@ var kinderKards = {
   },
 
   update: function(delta) {
-    kinderKards.currentCard.update(delta);
+    this.currentCard.update(delta);
   },
 
   render: function() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    kinderKards.currentCard.render();
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.currentCard.render();
   },
 
   then: Date.now(),
@@ -44,8 +44,8 @@ var kinderKards = {
     var now = Date.now();
     var delta = now - this.then;
 
-    update(delta / 1000);
-    render();
+    kinderKards.update(delta / 1000);
+    kinderKards.render();
 
     this.then = now;
   }
@@ -67,7 +67,9 @@ BasicCard.prototype.update = function(delta) {
 };
 
 BasicCard.prototype.render = function() {
-
+  kinderKards.ctx.fillStyle = 'green';
+  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width-10, kinderKards.canvas.height-10);
+  kinderKards.drawText(this.question, 30, 30, '#000');
 };
 
 CountCard.prototype = Object.create(BasicCard.prototype);
@@ -85,12 +87,12 @@ function CardCategory(name, cards) {
 }
 
 kinderKards.canvas.addEventListener('mousedown', function(e) {
-  mousePos = inputHandler.getMousePos(canvas, e);
+  mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
   //TODO current card click callback
 }, false);
 
 kinderKards.canvas.addEventListener('mousemove', function(e) {
-  mousePos = inputHandler.getMousePos(canvas, e);
+  mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
 }, false);
 
 window.addEventListener('keydown', function(e) {
