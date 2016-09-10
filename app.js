@@ -1,6 +1,8 @@
 var inputHandler = {
   keysDown: [],
+  keyTimes: [],
   mousePos: {x: 0, y: 0},
+  mouseDown: -1,
 
   getMousePos: function(canvas, e) {
     var rect = canvas.getBoundingClientRect();
@@ -15,7 +17,7 @@ var kinderKards = {
   canvas: document.getElementById('card-canvas'),
   ctx: document.getElementById('card-canvas').getContext('2d'),
 
-  currentCard: new BasicCard('What is love?', 'baby don\'t hurt me'),
+  currentCard: new BasicCard('Hit the letter A!', 'A'),
 
   drawText: function(text, x, y, color, size, font, align) {
     this.ctx.fillStyle = color;
@@ -62,6 +64,17 @@ BasicCard.prototype.checkAnswer = function(answer) {
   return false;
 };
 
+BasicCard.prototype.handleKeyClick = function(keyCode) {
+  var answer = String.fromCharCode(keyCode);
+  if (answer === this.answer) {
+    this.question = 'You did it!';
+  }
+};
+
+BasicCard.prototype.handleClick = function() {
+
+};
+
 BasicCard.prototype.update = function(delta) {
 
 };
@@ -87,17 +100,24 @@ function CardCategory(name, cards) {
 }
 
 kinderKards.canvas.addEventListener('mousedown', function(e) {
-  mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
-  //TODO current card click callback
+  inputHandler.mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
+  inputHandler.mouseDown = Date.now();
+}, false);
+
+kinderKards.canvas.addEventListener('mouseup', function(e) {
+  if ((Date.now() - inputHandler.mouseDown) < 1000) {
+    kinderKards.currentCard.handleClick();
+  }
 }, false);
 
 kinderKards.canvas.addEventListener('mousemove', function(e) {
-  mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
+  inputHandler.mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
 }, false);
 
 window.addEventListener('keydown', function(e) {
   inputHandler.keysDown[e.keyCode] = true;
-  switch(e.keyCode){
+  inputHandler.keyTimes[e.keyCode] = Date.now();
+  switch(e.keyCode) {
   case 37:
   case 39:
   case 38:
@@ -112,6 +132,9 @@ window.addEventListener('keydown', function(e) {
 
 window.addEventListener('keyup', function(e) {
   inputHandler.keysDown[e.keyCode] = false;
+  if ((Date.now() - inputHandler.keyTimes[e.keyCode]) < 1000) {
+    kinderKards.currentCard.handleKeyClick(e.keyCode);
+  }
 }, false);
 
-setInterval(kinderKards.main, 16.666667);
+setInterval(kinderKards.main, (1000 / 60));
