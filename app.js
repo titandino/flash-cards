@@ -9,7 +9,7 @@ var inputHandler = {
       y: (e.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
     };
   },
-}
+};
 
 var kinderKards = {
   canvas: document.getElementById('card-canvas'),
@@ -26,7 +26,7 @@ var kinderKards = {
   },
 
   getRandom: function(min, max) {
-    return Math.floor(Math.random() * (max-min) + min);
+    return Math.floor(Math.random() * (max - min) + min);
   },
 
   update: function(delta) {
@@ -49,7 +49,7 @@ var kinderKards = {
 
     this.then = now;
   }
-}
+};
 
 function BasicCard(question, answer) {
   this.question = question;
@@ -68,8 +68,8 @@ BasicCard.prototype.update = function(delta) {
 
 BasicCard.prototype.render = function() {
   kinderKards.ctx.fillStyle = 'green';
-  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width-10, kinderKards.canvas.height-10);
-  kinderKards.drawText(this.question, 30, 30, '#000');
+  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width - 10, kinderKards.canvas.height - 10);
+  kinderKards.drawText(this.question, kinderKards.canvas.width / 2, 30, '#000', '20px', 'Schoolbell', 'center');
 };
 
 CountCard.prototype = Object.create(BasicCard.prototype);
