@@ -24,7 +24,7 @@ BasicCard.prototype.handleClick = function() {
 
 };
 
-BasicCard.prototype.update = function(delta) {
+BasicCard.prototype.update = function() {
   if (this.answeredCorrect && ((Date.now() - this.answeredCorrect) > 5000)) {
     kinderKards.cardCategory.nextCard();
   }
@@ -32,7 +32,7 @@ BasicCard.prototype.update = function(delta) {
 
 BasicCard.prototype.render_ = function() {
   kinderKards.ctx.fillStyle = 'green';
-  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width - 10, kinderKards.canvas.height - 10);
+  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width - 20, kinderKards.canvas.height - 20);
   kinderKards.drawText(this.question, kinderKards.canvas.width / 2, 50, '#000', '20px', 'Schoolbell', 'center');
   if (!this.answeredCorrect && this.lastAnswer) {
     kinderKards.drawText(this.lastAnswer + ' was not correct. Try again!', kinderKards.canvas.width / 2, 320, '#000', '20px', 'Schoolbell', 'center');
@@ -55,8 +55,15 @@ function CountCard(question, image, min, max) {
 }
 
 CountCard.prototype.render = function() {
+  var height = 100;
+  var x = 0;
   for (var i = 0;i < this.answer;i++) {
-    kinderKards.ctx.drawImage(this.image, (40 * i) + 50, 100, 40, 40);
+    var xOffset = (45 * x++) + 40;
+    kinderKards.ctx.drawImage(this.image, xOffset, height, 40, 40);
+    if (x >= 5) {
+      x = 0;
+      height += 50;
+    }
   }
 };
 
@@ -99,7 +106,7 @@ var kinderKards = {
   ctx: document.getElementById('card-canvas').getContext('2d'),
 
   cardCategory: new CardCategory('Numbers', [
-    new CountCard('How many apples are there? #1', 'img/apple.png', 4, 6),
+    new CountCard('How many apples are there? #1', 'img/apple.png', 4, 25),
     new CountCard('How many apples are there? #2', 'img/apple.png', 1, 3),
     new CountCard('How many apples are there? #3', 'img/apple.png', 3, 5),
     new CountCard('How many apples are there? #4', 'img/apple.png', 2, 4),
@@ -149,7 +156,7 @@ kinderKards.canvas.addEventListener('mousedown', function(e) {
 
 kinderKards.canvas.addEventListener('mouseup', function(e) {
   if ((Date.now() - inputHandler.mouseDown) < 1000) {
-    kinderKards.cardCategory.currentCard.handleClick();
+    kinderKards.cardCategory.currentCard.handleClick(e);
   }
 }, false);
 
