@@ -13,13 +13,10 @@ BasicCard.prototype.checkAnswer = function(answer) {
 
 BasicCard.prototype.handleKeyClick = function(keyCode) {
   var answer = String.fromCharCode(keyCode);
-  if (typeof this.answer == 'number') {
-    answer = parseInt(answer);
-    if (isNaN(answer)) {
-
-    }
-  } else if (typeof this.answer == 'string') {
-
+  if (answer == this.answer) {
+    this.answeredCorrect = Date.now();
+  } else {
+    this.lastAnswer = answer;
   }
 };
 
@@ -84,10 +81,6 @@ CardCategory.prototype.nextCard = function() {
   this.currentIdx++;
   this.currentCard = this.cards[this.currentIdx];
 };
-
-function validChars(char) {
-  return str.match(/[a-z]/i);
-}
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
