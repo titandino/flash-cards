@@ -16,6 +16,11 @@ header {
   border-width: medium;
 }
 
+#card-canvas {
+  display: block;
+  margin: 0 auto;
+}
+
 #nav {
   display: flex;
   flex-direction: row;
