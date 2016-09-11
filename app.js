@@ -101,6 +101,14 @@ var kinderKards = {
   cardCategory: new CardCategory('Numbers', [
     new CountCard('How many apples are there? #1', 'img/apple.png', 4, 6),
     new CountCard('How many apples are there? #2', 'img/apple.png', 1, 3),
+    new CountCard('How many apples are there? #3', 'img/apple.png', 3, 5),
+    new CountCard('How many apples are there? #4', 'img/apple.png', 2, 4),
+    new CountCard('How many apples are there? #5', 'img/apple.png', 5, 7),
+    new CountCard('How many apples are there? #6', 'img/apple.png', 8, 10),
+    new CountCard('How many apples are there? #7', 'img/apple.png', 0, 2),
+    new CountCard('How many apples are there? #8', 'img/apple.png', 7, 9),
+    new CountCard('How many apples are there? #9', 'img/apple.png', 6, 8),
+    new CountCard('How many apples are there? #10', 'img/apple.png', 9, 11),
   ]),
 
   drawText: function(text, x, y, color, size, font, align) {
