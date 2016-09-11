@@ -1,3 +1,84 @@
+function BasicCard(question, answer) {
+  this.question = question;
+  this.answer = answer;
+  this.answeredCorrect = 0;
+  this.lastAnswer = '';
+}
+
+BasicCard.prototype.checkAnswer = function(answer) {
+  if (this.answer === answer)
+    return true;
+  return false;
+};
+
+BasicCard.prototype.handleKeyClick = function(keyCode) {
+  var answer = String.fromCharCode(keyCode);
+  if (answer == this.answer) {
+    this.answeredCorrect = Date.now();
+  } else {
+    this.lastAnswer = answer;
+  }
+};
+
+BasicCard.prototype.handleClick = function() {
+
+};
+
+BasicCard.prototype.update = function(delta) {
+  if (this.answeredCorrect && ((Date.now() - this.answeredCorrect) > 5000)) {
+    kinderKards.cardCategory.nextCard();
+  }
+};
+
+BasicCard.prototype.render_ = function() {
+  kinderKards.ctx.fillStyle = 'green';
+  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width - 10, kinderKards.canvas.height - 10);
+  kinderKards.drawText(this.question, kinderKards.canvas.width / 2, 50, '#000', '20px', 'Schoolbell', 'center');
+  if (!this.answeredCorrect && this.lastAnswer) {
+    kinderKards.drawText(this.lastAnswer + ' was not correct. Try again!', kinderKards.canvas.width / 2, 320, '#000', '20px', 'Schoolbell', 'center');
+  } else if (this.answeredCorrect) {
+    kinderKards.drawText('That is correct. Good job!', kinderKards.canvas.width / 2, 320, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Moving on to next card.', kinderKards.canvas.width / 2, 350, '#000', '20px', 'Schoolbell', 'center');
+  }
+};
+
+BasicCard.prototype.render = function() {
+
+};
+
+CountCard.prototype = Object.create(BasicCard.prototype);
+
+function CountCard(question, image, min, max) {
+  BasicCard.call(this, question, getRandom(min, max));
+  this.image = new Image();
+  this.image.src = image;
+}
+
+CountCard.prototype.render = function() {
+  for (var i = 0;i < this.answer;i++) {
+    kinderKards.ctx.drawImage(this.image, (40 * i) + 50, 100, 40, 40);
+  }
+};
+
+function CardCategory(name, cards) {
+  this.name = name;
+  this.cards = cards;
+  this.currentIdx = 0;
+  this.currentCard = this.cards[0];
+}
+
+CardCategory.prototype.nextCard = function() {
+  if (this.currentIdx == (this.cards.length - 1)) {
+    return;
+  }
+  this.currentIdx++;
+  this.currentCard = this.cards[this.currentIdx];
+};
+
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 var inputHandler = {
   keysDown: [],
   keyTimes: [],
@@ -17,7 +98,10 @@ var kinderKards = {
   canvas: document.getElementById('card-canvas'),
   ctx: document.getElementById('card-canvas').getContext('2d'),
 
-  currentCard: new BasicCard('Hit the letter A!', 'A'),
+  cardCategory: new CardCategory('Numbers', [
+    new CountCard('How many apples are there? #1', 'img/apple.png', 4, 6),
+    new CountCard('How many apples are there? #2', 'img/apple.png', 1, 3),
+  ]),
 
   drawText: function(text, x, y, color, size, font, align) {
     this.ctx.fillStyle = color;
@@ -27,17 +111,14 @@ var kinderKards = {
     this.ctx.fillText(text, x, y);
   },
 
-  getRandom: function(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-  },
-
   update: function(delta) {
-    this.currentCard.update(delta);
+    this.cardCategory.currentCard.update(delta);
   },
 
   render: function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.currentCard.render();
+    this.cardCategory.currentCard.render_();
+    this.cardCategory.currentCard.render();
   },
 
   then: Date.now(),
@@ -53,52 +134,6 @@ var kinderKards = {
   }
 };
 
-function BasicCard(question, answer) {
-  this.question = question;
-  this.answer = answer;
-}
-
-BasicCard.prototype.checkAnswer = function(answer) {
-  if (this.answer === answer)
-    return true;
-  return false;
-};
-
-BasicCard.prototype.handleKeyClick = function(keyCode) {
-  var answer = String.fromCharCode(keyCode);
-  if (answer === this.answer) {
-    this.question = 'You did it!';
-  }
-};
-
-BasicCard.prototype.handleClick = function() {
-
-};
-
-BasicCard.prototype.update = function(delta) {
-
-};
-
-BasicCard.prototype.render = function() {
-  kinderKards.ctx.fillStyle = 'green';
-  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width - 10, kinderKards.canvas.height - 10);
-  kinderKards.drawText(this.question, kinderKards.canvas.width / 2, 30, '#000', '20px', 'Schoolbell', 'center');
-};
-
-CountCard.prototype = Object.create(BasicCard.prototype);
-
-function CountCard(question, image, min, max) {
-  BasicCard.call(this, question);
-  this.image = new Image();
-  this.image.src = image;
-  this.answer = kinderKards.getRandom(min, max);
-}
-
-function CardCategory(name, cards) {
-  this.name = name;
-  this.cards = cards;
-}
-
 kinderKards.canvas.addEventListener('mousedown', function(e) {
   inputHandler.mousePos = inputHandler.getMousePos(kinderKards.canvas, e);
   inputHandler.mouseDown = Date.now();
@@ -106,7 +141,7 @@ kinderKards.canvas.addEventListener('mousedown', function(e) {
 
 kinderKards.canvas.addEventListener('mouseup', function(e) {
   if ((Date.now() - inputHandler.mouseDown) < 1000) {
-    kinderKards.currentCard.handleClick();
+    kinderKards.cardCategory.currentCard.handleClick();
   }
 }, false);
 
@@ -133,7 +168,7 @@ window.addEventListener('keydown', function(e) {
 window.addEventListener('keyup', function(e) {
   inputHandler.keysDown[e.keyCode] = false;
   if ((Date.now() - inputHandler.keyTimes[e.keyCode]) < 1000) {
-    kinderKards.currentCard.handleKeyClick(e.keyCode);
+    kinderKards.cardCategory.currentCard.handleKeyClick(e.keyCode);
   }
 }, false);
 
