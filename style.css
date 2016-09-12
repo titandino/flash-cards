@@ -7,13 +7,18 @@ body {
   font-family: 'Schoolbell', cursive;
   color: yellow;
 }
-header {
+h1 {
   text-align: center;
-  background-color: rgb(0,128,0);
+  background-image: url("img/wood1.jpg");
+  height:75px;
+  width: 550px;
   color:yellow;
+  font-size: 48px;
+  font-weight: bold;
   border-style: ridge;
-  border-color: blue;
-  border-width: medium;
+  border-color: Yellow;
+  border-width: 10px;
+  margin:0 auto;
 }
 
 #card-canvas {
@@ -26,18 +31,17 @@ header {
   flex-direction: row;
   justify-content: space-around;
   list-style: none;
-  font-size: 18px;
-  color: yellow;
-  border-style: solid
-  border-width: medium;
-  border-color: blue;
-  background-color: green;
 }
+
 li {
   padding: 3px;
-  /*border-style: ridge;
-  border-width: medium;
-  border-color: yellow*/
+  font-size: 24px;
+  font-weight: bold;
+
+  border-style: ridge;
+  border-width: 7px;
+  border-color: yellow;
+  background-image: url("img/wood1.jpg");
 }
 #welcome {
   background-color: green;
@@ -55,4 +59,24 @@ footer {
   border-width: medium;
   padding: 3px;
   text-align: center;
+}
+
+.hvr-grow-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
