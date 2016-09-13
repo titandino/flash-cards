@@ -37,12 +37,12 @@ li {
   padding: 3px;
   font-size: 24px;
   font-weight: bold;
-
   border-style: ridge;
   border-width: 7px;
   border-color: yellow;
   background-image: url("img/wood1.jpg");
 }
+
 #welcome {
   background-color: green;
   border-style: ridge;
@@ -59,6 +59,35 @@ footer {
   border-width: medium;
   padding: 3px;
   text-align: center;
+}
+
+#about {
+  padding: 3px;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  text-align: center;
+  background-image: url("img/wood1.jpg");
+  width: 750px;
+  height: 350px;
+}
+
+.colby {
+  color: red;
+  border-style: ridge;
+  border-width: 7px;
+  border-color: red;
+  margin: 10px auto;
+}
+
+.trent {
+  color: green;
+  text-shadow: 2px;
+  border-style: ridge;
+  border-width: 7px;
+  border-color: blue;
+  margin: 10px auto;
 }
 
 .hvr-grow-shadow {
