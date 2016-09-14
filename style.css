@@ -28,6 +28,12 @@ h1 {
   margin: 0 auto;
 }
 
+canvas {
+  border-style: ridge;
+  border-color: #ff752a;
+  border-width: 10px;
+}
+
 #nav {
   display: flex;
   flex-direction: row;
