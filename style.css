@@ -1,12 +1,13 @@
 html {
   background-image:url("img/abc-back.jpg");
-  background-size:cover;
+  background-size: 1500px;
 }
 
 body {
   font-family: 'Schoolbell', cursive;
   color: yellow;
 }
+
 h1 {
   text-align: center;
   background-image: url("img/wood1.jpg");
@@ -19,6 +20,7 @@ h1 {
   border-color: Yellow;
   border-width: 10px;
   margin:0 auto;
+  padding: 8px;
 }
 
 #card-canvas {
@@ -89,6 +91,50 @@ footer {
   border-width: 7px;
   border-color: #50c4ed;
   margin: 20px auto;
+}
+
+@-webkit-keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+
+@keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+
+.hvr-buzz {
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+  -webkit-animation-name: hvr-buzz;
+  animation-name: hvr-buzz;
+  -webkit-animation-duration: 0.15s;
+  animation-duration: 0.15s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
 }
 
 .hvr-grow-shadow {
