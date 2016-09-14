@@ -14,12 +14,14 @@ BasicCard.prototype.checkAnswer = function(answer) {
 
 BasicCard.prototype.handleKeyClick = function(keyCode) {
   var answer = String.fromCharCode(keyCode);
-  if (answer == this.answer) {
-    this.answeredCorrect = Date.now();
-  } else {
-    this.lastAnswer = answer;
+  if (this.answeredCorrect === 0) {
+    if (answer == this.answer) {
+      this.answeredCorrect = Date.now();
+    } else {
+      this.lastAnswer = answer;
+    }
+    this.attempts++;
   }
-  this.attempts++;
 };
 
 BasicCard.prototype.handleClick = function() {
@@ -83,7 +85,7 @@ CardCategory.prototype.nextCard = function() {
     this.categoryFinished = true;
     this.currentCard = null;
     kinderKards.scores.push(new CategoryScore(this.name, this.score));
-    localStorage.scores = kinderKards.scores;
+    localStorage.scores = JSON.stringify(kinderKards.scores);
     return;
   }
   this.score += this.cards[this.currentIdx].attempts;
