@@ -144,7 +144,7 @@ var kinderKards = {
 
   renderBackground: function() {
     this.ctx.fillStyle = 'green';
-    this.ctx.fillRect(10, 10, this.canvas.width - 20, this.canvas.height - 20);
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   },
 
   drawText: function(text, x, y, color, size, font, align) {
