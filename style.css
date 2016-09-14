@@ -62,6 +62,18 @@ li {
   text-align: center;
 }
 
+#mainBody {
+  background-image: url("img/wood1.jpg");
+  font-size: 24px;
+  font-family: sans-serif;
+  border-style: ridge;
+  border-color: #50c4ed;
+  border-width: 10px;
+  padding: 3px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 footer {
   text-align: center;
   background-image: url("img/wood1.jpg");
