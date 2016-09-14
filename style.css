@@ -11,7 +11,7 @@ h1 {
   text-align: center;
   background-image: url("img/wood1.jpg");
   height:75px;
-  width: 550px;
+  max-width: 550px;
   color:yellow;
   font-size: 48px;
   font-weight: bold;
@@ -39,26 +39,28 @@ li {
   font-weight: bold;
   border-style: ridge;
   border-width: 7px;
-  border-color: yellow;
+  border-color: #b1d943;
   background-image: url("img/wood1.jpg");
 }
 
 #welcome {
-  background-color: green;
+  background-image: url("img/wood1.jpg");
+  font-size: 24px;
+  font-family: sans-serif;
   border-style: ridge;
-  border-color: blue;
-  border-width: medium;
+  border-color: #50c4ed;
+  border-width: 10px;
   padding: 3px;
   text-align: center;
 }
 
 footer {
-  background-color: green;
-  border-style: ridge;
-  border-color: blue;
-  border-width: medium;
-  padding: 3px;
   text-align: center;
+  background-image: url("img/wood1.jpg");
+  border-style: ridge;
+  border-color: yellow;
+  border-width: 10px;
+  padding: 3px;
 }
 
 #about {
@@ -69,25 +71,24 @@ footer {
   flex-wrap: wrap-reverse;
   text-align: center;
   background-image: url("img/wood1.jpg");
-  width: 750px;
-  height: 350px;
-}
-
-.colby {
-  color: red;
-  border-style: ridge;
-  border-width: 7px;
-  border-color: red;
-  margin: 10px auto;
+  max-width: 750px;
+  /*max-height: 350px;*/
 }
 
 .trent {
-  color: green;
-  text-shadow: 2px;
+  color: black;
   border-style: ridge;
   border-width: 7px;
-  border-color: blue;
-  margin: 10px auto;
+  border-color: #ff752a;
+  margin: 20px auto;
+}
+
+.colby {
+  color: black;
+  border-style: ridge;
+  border-width: 7px;
+  border-color: #50c4ed;
+  margin: 20px auto;
 }
 
 .hvr-grow-shadow {
