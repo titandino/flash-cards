@@ -3,6 +3,7 @@ function BasicCard(question, answer) {
   this.answer = answer;
   this.answeredCorrect = 0;
   this.lastAnswer = '';
+  this.attempts = 0;
 }
 
 BasicCard.prototype.checkAnswer = function(answer) {
@@ -18,6 +19,7 @@ BasicCard.prototype.handleKeyClick = function(keyCode) {
   } else {
     this.lastAnswer = answer;
   }
+  this.attempts++;
 };
 
 BasicCard.prototype.handleClick = function() {
@@ -31,8 +33,7 @@ BasicCard.prototype.update = function() {
 };
 
 BasicCard.prototype.render_ = function() {
-  kinderKards.ctx.fillStyle = 'green';
-  kinderKards.ctx.fillRect(10, 10, kinderKards.canvas.width - 20, kinderKards.canvas.height - 20);
+  kinderKards.renderBackground();
   kinderKards.drawText(this.question, kinderKards.canvas.width / 2, 50, '#000', '20px', 'Schoolbell', 'center');
   if (!this.answeredCorrect && this.lastAnswer) {
     kinderKards.drawText(this.lastAnswer + ' was not correct. Try again!', kinderKards.canvas.width / 2, 320, '#000', '20px', 'Schoolbell', 'center');
@@ -72,14 +73,35 @@ function CardCategory(name, cards) {
   this.cards = cards;
   this.currentIdx = 0;
   this.currentCard = this.cards[0];
+  this.total = this.cards.length;
+  this.score = 0;
+  this.categoryFinished = false;
 }
 
 CardCategory.prototype.nextCard = function() {
   if (this.currentIdx == (this.cards.length - 1)) {
+    this.categoryFinished = true;
+    this.currentCard = null;
+    kinderKards.scores.push(new CategoryScore(this.name, this.score));
+    localStorage.scores = kinderKards.scores;
     return;
   }
+  this.score += this.cards[this.currentIdx].attempts;
   this.currentIdx++;
   this.currentCard = this.cards[this.currentIdx];
+};
+
+CardCategory.prototype.render = function() {
+  if (this.categoryFinished) {
+    kinderKards.renderBackground();
+    kinderKards.drawText('You finished the ' + this.name + ' category.', kinderKards.canvas.width / 2, 220, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Final score: ' + this.score, kinderKards.canvas.width / 2, 270, '#000', '20px', 'Schoolbell', 'center');
+  }
+};
+
+function CategoryScore(name, score) {
+  this.name = name;
+  this.score = score;
 };
 
 function getRandom(min, max) {
@@ -106,17 +128,22 @@ var kinderKards = {
   ctx: document.getElementById('card-canvas').getContext('2d'),
 
   cardCategory: new CardCategory('Numbers', [
-    new CountCard('How many apples are there? #1', 'img/apple.png', 4, 25),
+    new CountCard('How many apples are there? #1', 'img/apple.png', 4, 9),
     new CountCard('How many apples are there? #2', 'img/apple.png', 1, 3),
     new CountCard('How many apples are there? #3', 'img/apple.png', 3, 5),
     new CountCard('How many apples are there? #4', 'img/apple.png', 2, 4),
     new CountCard('How many apples are there? #5', 'img/apple.png', 5, 7),
     new CountCard('How many apples are there? #6', 'img/apple.png', 8, 10),
-    new CountCard('How many apples are there? #7', 'img/apple.png', 0, 2),
+    new CountCard('How many apples are there? #7', 'img/apple.png', 1, 2),
     new CountCard('How many apples are there? #8', 'img/apple.png', 7, 9),
     new CountCard('How many apples are there? #9', 'img/apple.png', 6, 8),
-    new CountCard('How many apples are there? #10', 'img/apple.png', 9, 11),
+    new CountCard('How many apples are there? #10', 'img/apple.png', 8, 9),
   ]),
+
+  renderBackground: function() {
+    this.ctx.fillStyle = 'green';
+    this.ctx.fillRect(10, 10, this.canvas.width - 20, this.canvas.height - 20);
+  },
 
   drawText: function(text, x, y, color, size, font, align) {
     this.ctx.fillStyle = color;
@@ -127,13 +154,18 @@ var kinderKards = {
   },
 
   update: function(delta) {
-    this.cardCategory.currentCard.update(delta);
+    if (this.cardCategory.currentCard) {
+      this.cardCategory.currentCard.update(delta);
+    }
   },
 
   render: function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.cardCategory.currentCard.render_();
-    this.cardCategory.currentCard.render();
+    if (this.cardCategory.currentCard) {
+      this.cardCategory.currentCard.render_();
+      this.cardCategory.currentCard.render();
+    }
+    this.cardCategory.render();
   },
 
   then: Date.now(),
@@ -141,6 +173,14 @@ var kinderKards = {
   main: function() {
     var now = Date.now();
     var delta = now - this.then;
+
+    if (!kinderKards.scores) {
+      if (localStorage.scores) {
+        kinderKards.scores = JSON.parse(localStorage.scores);
+      } else {
+        kinderKards.scores = [];
+      }
+    }
 
     kinderKards.update(delta / 1000);
     kinderKards.render();
