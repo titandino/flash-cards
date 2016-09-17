@@ -70,6 +70,18 @@ CountCard.prototype.render = function() {
   }
 };
 
+LetterCard.prototype = Object.create(BasicCard.prototype);
+
+function LetterCard(image, answer) {
+  BasicCard.call(this, 'What letter does this start with?', answer);
+  this.image = new Image();
+  this.image.src = image;
+}
+
+LetterCard.prototype.render = function() {
+  kinderKards.ctx.drawImage(this.image, kinderKards.canvas.width / 2 - 75, kinderKards.canvas.height / 2 - 75, 150, 150);
+};
+
 function CardCategory(name, cards) {
   this.name = name;
   this.cards = cards;
@@ -129,7 +141,12 @@ var kinderKards = {
   canvas: document.getElementById('card-canvas'),
   ctx: document.getElementById('card-canvas').getContext('2d'),
 
+  cardCategory2: new CardCategory('Letters', [
+    new LetterCard('img/apple.png', 'A'),
+  ]),
+
   cardCategory: new CardCategory('Numbers', [
+    new LetterCard('img/apple.png', 'A'),
     new CountCard('How many apples are there? #1', 'img/apple.png', 4, 9),
     new CountCard('How many apples are there? #2', 'img/apple.png', 1, 3),
     new CountCard('How many apples are there? #3', 'img/apple.png', 3, 5),
