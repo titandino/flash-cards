@@ -33,6 +33,7 @@ h1 {
   border-style: ridge;
   border-color: #ff752a;
   border-width: 10px;
+  margin-bottom: 10px;
 }
 
 #canvas-container {
