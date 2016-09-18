@@ -116,6 +116,7 @@ footer {
   border-width: 7px;
   border-color: #ff752a;
   margin: 20px auto;
+  padding-left: 10px;
 }
 
 .colby {
@@ -124,6 +125,13 @@ footer {
   border-width: 7px;
   border-color: #50c4ed;
   margin: 20px auto;
+  padding-left: 10px;
+}
+#aboutPic {
+  height: 256px;
+  align-content: center;
+  padding-bottom: 10px;
+  margin: -10px auto;
 }
 
 @-webkit-keyframes hvr-buzz {
