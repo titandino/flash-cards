@@ -3,16 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>Kindergarten Kards</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Schoolbell" rel="stylesheet">
   </head>
   <body>
     <header>
-      <nav></nav>
+      <h1 class="hvr-buzz">Flash Card Game</h1>
     </header>
+      <nav>
+        <ul id="nav">
+          <li class="hvr-grow-shadow"><a href="index.html">Home</a></li>
+          <li class="hvr-grow-shadow"><a href="play.html">Play</a></li>
+          <li class="hvr-grow-shadow"><a href="score.html">Scores</a></li>
+          <li class="hvr-grow-shadow"><a href="aboutus.html">About Us</a></li>
+        </ul>
+      </nav>
     <main>
-
+      <div id="canvas-container">
+        <div id="canvas-card">
+          <canvas id="card-canvas" width="300" height="400"></canvas>
+        </div>
+      </div>
     </main>
-    <footer>
-
-    </footer>
+    <footer>Property of Kindergarten Kards. &copy;2016</footer>
+    <script src="app.js" charset="utf-8"></script>
   </body>
 </html>
