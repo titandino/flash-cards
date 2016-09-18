@@ -31,6 +31,8 @@ BasicCard.prototype.handleClick = function() {
 BasicCard.prototype.update = function() {
   if (this.answeredCorrect && ((Date.now() - this.answeredCorrect) > 5000)) {
     kinderKards.cardCategory.nextCard();
+  } else if (this.answeredCorrect && (Date.now() - this.answeredCorrect) > 4250) {
+    document.getElementById('canvas-container').className = 'rotate';
   }
 };
 
@@ -100,6 +102,7 @@ CardCategory.prototype.nextCard = function() {
     localStorage.scores = JSON.stringify(kinderKards.scores);
     return;
   }
+  document.getElementById('canvas-container').className = '';
   this.score += this.cards[this.currentIdx].attempts;
   this.currentIdx++;
   this.currentCard = this.cards[this.currentIdx];
@@ -108,8 +111,9 @@ CardCategory.prototype.nextCard = function() {
 CardCategory.prototype.render = function() {
   if (this.categoryFinished) {
     kinderKards.renderBackground();
-    kinderKards.drawText('Very good! You finished.', kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 - 20, '#000', '20px', 'Schoolbell', 'center');
-    kinderKards.drawText('Final score: ' + this.score, kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 + 20, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Very good! You finished.', kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 - 40, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Final score: ' + this.score, kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 + 40, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Your score has been saved.', kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 + 80, '#000', '20px', 'Schoolbell', 'center');
   }
 };
 

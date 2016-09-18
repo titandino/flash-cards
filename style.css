@@ -30,12 +30,22 @@ h1 {
 #card-canvas {
   display: block;
   margin: 0 auto;
-}
-
-canvas {
   border-style: ridge;
   border-color: #ff752a;
   border-width: 10px;
+}
+
+#canvas-container {
+  transform-style: preserve-3d;
+  transition: all 1.0s linear;
+}
+
+#canvas-card {
+  perspective: 1000;
+}
+
+.rotate {
+  transform: rotateY(360deg);
 }
 
 #nav {
