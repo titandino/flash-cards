@@ -52,9 +52,29 @@ li {
   border-style: ridge;
   border-width: 7px;
   border-color: #b1d943;
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgba(0, 0, 0, 0.35);
   background-image: url("img/wood1.jpg");
   background-blend-mode: color-burn;
+
+}
+
+a:link {
+    color: #b1d943;
+}
+
+a:visited {
+    color: #50c4ed;
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 #welcome {
@@ -132,6 +152,10 @@ footer {
   align-content: center;
   padding-bottom: 10px;
   margin: -10px auto;
+}
+
+#scoreSection {
+  color:#50c4ed;
 }
 
 @-webkit-keyframes hvr-buzz {
