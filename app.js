@@ -108,8 +108,8 @@ CardCategory.prototype.nextCard = function() {
 CardCategory.prototype.render = function() {
   if (this.categoryFinished) {
     kinderKards.renderBackground();
-    kinderKards.drawText('You finished the ' + this.name + ' category.', kinderKards.canvas.width / 2, 220, '#000', '20px', 'Schoolbell', 'center');
-    kinderKards.drawText('Final score: ' + this.score, kinderKards.canvas.width / 2, 270, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Very good! You finished.', kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 - 20, '#000', '20px', 'Schoolbell', 'center');
+    kinderKards.drawText('Final score: ' + this.score, kinderKards.canvas.width / 2, kinderKards.canvas.height / 2 + 20, '#000', '20px', 'Schoolbell', 'center');
   }
 };
 
@@ -144,6 +144,7 @@ var kinderKards = {
   cardCategory: new CardCategory('Numbers and Letters', [
     new LetterCard('img/apple.png', 'A'),
     new CountCard('How many apples are there?', 'img/apple.png', 4, 9),
+<<<<<<< HEAD
     new LetterCard('img/grapes-02.jpg', 'G'),
     new CountCard('How many grapes are there?', 'img/grapes-2.jpg', 3, 5),
     new LetterCard('img/orange.jpeg', 'O'),
@@ -158,6 +159,22 @@ var kinderKards = {
     new CountCard('How many flags are there?', 'img/flag.png', 3, 9),
     new LetterCard('img/sun.jpeg', 'S'),
     new CountCard('How many suns are there?', 'img/sun.jpeg', 1, 4),
+=======
+    new LetterCard('img/grapes.png', 'G'),
+    new CountCard('How many grapes are there?', 'img/grapes.png', 3, 5),
+    new LetterCard('img/orange.png', 'O'),
+    new CountCard('How many oranges are there?', 'img/orange.png', 5, 9),
+    new LetterCard('img/car.png', 'C'),
+    new CountCard('How many cars are there?', 'img/car.png', 5, 9),
+    new LetterCard('img/truck.png', 'T'),
+    new CountCard('How many trucks are there?', 'img/truck.png', 2, 6),
+    new LetterCard('img/football.png', 'F'),
+    new CountCard('How many footballs are there?', 'img/football.png', 3, 9),
+    new LetterCard('img/flag.png', 'F'),
+    new CountCard('How many flags are there?', 'img/flag.png', 3, 9),
+    new LetterCard('img/sun.png', 'S'),
+    new CountCard('How many suns are there?', 'img/sun.png', 1, 4),
+>>>>>>> a141d596190b5e4ca2395ee44d08c4d1cb4842a5
     new LetterCard('img/moon.png', 'M'),
     new CountCard('How many moons are there?', 'img/moon.png', 1, 4),
     new LetterCard('img/bike.png', 'B'),
