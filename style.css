@@ -10,7 +10,9 @@ body {
 
 h1 {
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.35);
   background-image: url("img/wood1.jpg");
+  background-blend-mode: color-burn;
   height:75px;
   max-width: 550px;
   color:yellow;
@@ -22,6 +24,8 @@ h1 {
   margin:0 auto;
   padding: 8px;
 }
+
+
 
 #card-canvas {
   display: block;
@@ -48,13 +52,17 @@ li {
   border-style: ridge;
   border-width: 7px;
   border-color: #b1d943;
+  background-color: rgba(255, 255, 255, 0.35);
   background-image: url("img/wood1.jpg");
+  background-blend-mode: color-burn;
 }
 
 #welcome {
+  background-color: rgba(0, 0, 0, 0.35);
   background-image: url("img/wood1.jpg");
-  font-size: 24px;
+  background-blend-mode: color-burn;  font-size: 24px;
   font-family: sans-serif;
+  color: #50c4ed;
   border-style: ridge;
   border-color: #50c4ed;
   border-width: 10px;
@@ -63,8 +71,9 @@ li {
 }
 
 #mainBody {
+  background-color: rgba(255, 255, 255, 0.35);
   background-image: url("img/wood1.jpg");
-  font-size: 24px;
+  background-blend-mode: color-burn;  font-size: 24px;
   font-family: sans-serif;
   border-style: ridge;
   border-color: #50c4ed;
@@ -76,8 +85,9 @@ li {
 
 footer {
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.35);
   background-image: url("img/wood1.jpg");
-  border-style: ridge;
+  background-blend-mode: color-burn;  border-style: ridge;
   border-color: yellow;
   border-width: 10px;
   padding: 3px;
@@ -90,8 +100,9 @@ footer {
   display: flex;
   flex-wrap: wrap-reverse;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.35);
   background-image: url("img/wood1.jpg");
-  max-width: 750px;
+  background-blend-mode: color-burn;  max-width: 750px;
   /*max-height: 350px;*/
 }
 
